@@ -4,7 +4,6 @@ import com.stenmartin.secret_contacts_backend.api.dto.ContactDto;
 import com.stenmartin.secret_contacts_backend.api.dto.Response;
 import com.stenmartin.secret_contacts_backend.persistence.entities.Contact;
 import com.stenmartin.secret_contacts_backend.persistence.repositories.ContactRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 

@@ -25,26 +25,26 @@ class ContactServiceTest {
 
     @Container
     @ServiceConnection
-    static PostgreSQLContainer postgreSQLContainer = new PostgreSQLContainer("postgres:16");
+    static PostgreSQLContainer<?> postgreSQLContainer = new PostgreSQLContainer<>("postgres:16");
 
     @Test
     void connectionTest() {
-        assertTrue(postgreSQLContainer.isCreated());
-        assertTrue(postgreSQLContainer.isRunning());
+        assertTrue(postgreSQLContainer.isCreated(), "The container should be created");
+        assertTrue(postgreSQLContainer.isRunning(), "The container should be running");
     }
 
 
     @Test
-    void AddContact() {
-        final ContactDto contact = new ContactDto("Mike", "lll2", "12312");
+    void addContactTest() {
+        final ContactDto contact = new ContactDto("Mike", "fad", "5423");
         final Response<Contact> result = contactService.addContact(contact);
         assertNotNull(result.getResult().getId(), "Id should be added to the contact");
-        Assertions.assertEquals(1, contactService.getAllContacts().size() ,"one contact should be added");
+        assertEquals(1, contactService.getAllContacts().size() ,"one contact should be added");
     }
 
     @Test
-    void DeleteContact() {
-        final ContactDto contact = new ContactDto("Anna", "lll2", "12312");
+    void deleteContactTest() {
+        final ContactDto contact = new ContactDto("Anna", "asdf", "65456546");
         final Response<Contact> result = contactService.addContact(contact);
         assertTrue(result.isSuccess(), "Adding contact should be successful");
         assertNotNull(result.getResult());
@@ -52,13 +52,13 @@ class ContactServiceTest {
         final Response<Boolean> deleteResult = contactService.deleteContact(id);
         assertTrue(deleteResult.isSuccess(), "Contact should be deleted successfully");
         assertTrue(deleteResult.getResult(), "The result should be true");
-        Assertions.assertEquals(0, contactService.getAllContacts().size(), "Nothing should remain in database");
+        assertEquals(0, contactService.getAllContacts().size(), "Nothing should remain in database");
     }
 
     @Test
-    void UpdateContact() {
+    void updateContactTest() {
         final Response<Contact> contact = contactService.addContact(
-                new ContactDto("Lina", "lll2", "12312")
+                new ContactDto("Lina", "kldgf", "546456")
         );
         assertTrue(contact.isSuccess(), "Contact should be added successfully");
         final Response<Contact> updateResponse = contactService.updateContact(
@@ -73,9 +73,9 @@ class ContactServiceTest {
     }
 
     @Test
-    void GetAllContacts() {
-        contactService.addContact(new ContactDto("Lina", "lll2", "12312"));
-        contactService.addContact(new ContactDto("Lina2", "lll2", "12312"));
-        Assertions.assertEquals(2, contactService.getAllContacts().size());
+    void getAllContactsTest() {
+        contactService.addContact(new ContactDto("Lina", "mkgfds", "125654312"));
+        contactService.addContact(new ContactDto("Lina2", "sdgf", "12365412"));
+        assertEquals(2, contactService.getAllContacts().size());
     }
 }

@@ -19,12 +19,12 @@ public class ContactController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Contact>> GetAllContacts() {
+    public ResponseEntity<List<Contact>> getAllContacts() {
         return ResponseEntity.ok(contactService.getAllContacts());
     }
 
     @PostMapping
-    public ResponseEntity<?> AddContact(@RequestBody ContactDto addContactDto) {
+    public ResponseEntity<?> addContact(@RequestBody ContactDto addContactDto) {
         Response<Contact> response = contactService.addContact(addContactDto);
         if (!response.isSuccess()) {
             return ResponseEntity.badRequest().body(response);
@@ -33,7 +33,7 @@ public class ContactController {
     }
 
     @PostMapping("{id}")
-    public ResponseEntity<?> UpdateContact(@PathVariable Long id, @RequestBody ContactDto contact) {
+    public ResponseEntity<?> updateContact(@PathVariable Long id, @RequestBody ContactDto contact) {
         Response<Contact> response = contactService.updateContact(contact, id);
         if (!response.isSuccess()) {
             return ResponseEntity.badRequest().body(response);
@@ -42,7 +42,7 @@ public class ContactController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Response<Boolean>> DeleteContact(@PathVariable Long id) {
+    public ResponseEntity<Response<Boolean>> deleteContact(@PathVariable Long id) {
         return ResponseEntity.ok(contactService.deleteContact(id));
     }
 }
