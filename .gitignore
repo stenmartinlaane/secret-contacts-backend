@@ -48,9 +48,6 @@ dependency-reduced-pom.xml
 .gradle
 README.html
 
-.mvn/
-mvnw
-mvnw.cmd
 target/
 
 .tmp/
